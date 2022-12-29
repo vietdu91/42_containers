@@ -1,0 +1,12 @@
+* Introduction a std::function
+
+	https://h-deb.clg.qc.ca/Sujets/TrucsScouts/intro_std_function.html
+
+* Namescape
+
+	https://en.cppreference.com/w/cpp/language/namespace
+
+* Iterateurs
+
+	http://guillaume.belz.free.fr/doku.php?id=iterateurs
+	https://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/Intro--Conteneurs-Iterateurs.html
