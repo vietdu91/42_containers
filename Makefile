@@ -10,8 +10,14 @@ COMPILER	=	c++
 	# Variables #
 
 SRCS		=		main.cpp \
+					beauty.cpp \
+					test_std_functions.cpp \
 
-INCLUDES	=		includes/std_functions/equal.hpp
+INCLUDES	=		includes/test.hpp \
+					includes/colors.hpp \
+					includes/std_functions/equal.hpp \
+					includes/std_functions/is_integral.hpp \
+					includes/std_functions/lexicographical_compare.hpp \
 
 	# Colors Foreground #
 
@@ -24,6 +30,7 @@ GREEN		=	\033[0;32m
 GREEN_B		=	\033[1;32m
 L_GREEN		=	\033[0;92m
 YELLOW		=	\033[0;33m
+YELLOW_B	=	\033[1;33m
 L_YELLOW	=	\033[0;93m
 BLUE		=	\033[0;34m
 BLUE_B		=	\033[1;34m
@@ -88,18 +95,18 @@ std:		${STD_NAME}
 
 $(NAME):	${OBJS} ${INCLUDES}
 			${COMPILER} ${FLAGS} -I includes ${OBJS} -o $(NAME)
-			@printf "\n\n$(SKY)████████████████  😊 😊 😊  PENSEE DU JOUR POUR TE FAIRE SOURIRE  😊 😊 😊  ████████████████$(RESET)"
-			@printf "\n\n$(BLUE_B)Hell has a name : FT_CONTAINERS ☠🔥😈✡⛩️☠✝👹☄💀👿☦☠🔥😈✡⛩️☠✝👹☄💀👿☦ !!!  \n\n$(RESET)"
-			@printf "$(YELLOW)============$(RESET)"
-			@printf "\e[38;5;227m============$(RESET)"
-			@printf "\e[38;5;228m============$(RESET)"
-			@printf "\e[38;5;229m============$(RESET)"
-			@printf "\e[38;5;230m============$(RESET)"
-			@printf "\e[38;5;231m============\n$(RESET)"
-			@printf "$(GREEN)La vie passe, la moulinette trepasse !\n\n$(RESET)"
 
 $(STD_NAME):	${STD_OBJS} ${INCLUDES}
 				${COMPILER} ${FLAGS} -I includes ${STD_OBJS} -o $(STD_NAME)
+				@printf "\n\n$(SKY)████████████████  😊 😊 😊  PENSEE DU JOUR POUR TE FAIRE SOURIRE  😊 😊 😊  ████████████████$(RESET)"
+				@printf "\n\n$(BLUE_B)Hell has a name : FT_CONTAINERS ☠🔥😈✡⛩️☠✝👹☄💀👿☦☠🔥😈✡⛩️☠✝👹☄💀👿☦ !!!  \n\n$(RESET)"
+				@printf "$(YELLOW)============$(RESET)"
+				@printf "\e[38;5;227m============$(RESET)"
+				@printf "\e[38;5;228m============$(RESET)"
+				@printf "\e[38;5;229m============$(RESET)"
+				@printf "\e[38;5;230m============$(RESET)"
+				@printf "\e[38;5;231m============\n$(RESET)"
+				@printf "$(GREEN)La vie passe, la moulinette trepasse !\n\n$(RESET)"
 
 -include $(DEP)
 
@@ -111,12 +118,20 @@ objs_std/%.o:	srcs/%.cpp
 				@mkdir -p $(dir $@)
 				@${COMPILER} -MMD -MP ${FLAGS} -I includes -D STD -o $@ -c $<
 
+time :	${NAME} ${STD_NAME}
+		@printf "\n\n$(YELLOW_B)"
+		@/usr/bin/time ./$(NAME) > /dev/null
+		@printf "$(RESET)"
+		@printf "\n\n$(RED_B)"
+		@/usr/bin/time ./$(STD_NAME) > /dev/null
+		@printf "\n\n$(RESET)"
+
 diff :	${NAME} ${STD_NAME}
 		@./$(NAME) > $(NAME).txt
 		@./$(STD_NAME) > $(STD_NAME).txt
 		@printf "\n\n$(PINK_B)"
-		-@diff -s $(NAME).txt $(STD_NAME).txt
-		@printf "$(RESET)"
+		-@diff -s $(NAME).txt $(STD_NAME).txt || exit 0
+		@printf "\n\n$(RESET)"
 		@rm $(NAME).txt $(STD_NAME).txt
 
 clean:
@@ -158,4 +173,4 @@ re:			fclean all
 			@printf "\e[38;5;230m============$(RESET)"
 			@printf "\e[38;5;231m============\n$(RESET)"
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re time diff

@@ -10,3 +10,16 @@
 
 	http://guillaume.belz.free.fr/doku.php?id=iterateurs
 	https://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/Intro--Conteneurs-Iterateurs.html
+
+* RBT
+
+	https://www.youtube.com/watch?v=3RQtq7PDHog
+	https://www.youtube.com/watch?v=h1Z8_ebEqao&t=1272s
+
+* template <>
+
+	https://stackoverflow.com/questions/4872809/in-c-what-does-template-mean
+
+* volatile
+
+	https://www.tutorialspoint.com/what-is-volatile-keyword-in-cplusplus
