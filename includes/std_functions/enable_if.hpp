@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   enable_if.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:48:56 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/09 15:20:50 by emtran           ###   ########.fr       */
+/*   Created: 2023/01/09 15:05:23 by emtran            #+#    #+#             */
+/*   Updated: 2023/01/09 15:20:34 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/test.hpp"
+#ifndef ENABLE_IF_HPP
+# define ENABLE_IF_HPP
 
-int main()
-{
-	//std::cout << "C KI ??? C'EST : " << _NAMESPACE << std::endl;
-	intro_std_functions();
-	test_equal();
-	test_lexicographical_compare();
-	test_is_integral();
-	test_make_pair();
-	test_enable_if();
+namespace	ft {
+
+	template<bool B, class T = void>
+	struct enable_if {};
+
+	template<class T>
+	struct enable_if<true, T> {
+
+		typedef T type;
+	};
 }
+#endif
