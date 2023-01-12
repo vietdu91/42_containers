@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/12 15:06:09 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:28:26 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@
 	#include "../includes/std_functions/is_integral.hpp"
 	#include "../includes/std_functions/pair.hpp"
 	#include "../includes/std_functions/enable_if.hpp"
-	#include "../includes/std_functions/iterator.hpp"
-	#include "../includes/std_functions/iterator_traits.hpp"
-	#include "../includes/std_functions/reverse_iterator.hpp"
+	#include "../includes/iterators/iterator.hpp"
+	#include "../includes/iterators/iterator_traits.hpp"
+	#include "../includes/iterators/reverse_iterator.hpp"
 #endif
 
 

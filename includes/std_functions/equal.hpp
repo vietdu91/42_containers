@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:04:05 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/03 17:46:19 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:24:09 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ namespace	ft {
 		return true;
 	}
 
-	template<class It1, class It2, class BinaryPredicate >
+	template<class It1, class It2, class BinaryPredicate>
 	bool equal(It1 first1, It1 last1, It2 first2, BinaryPredicate p){
 
 		for (; first1 != last1; ++first1, ++first2) {
