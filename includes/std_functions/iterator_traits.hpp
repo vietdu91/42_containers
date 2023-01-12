@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:26:40 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/09 15:37:27 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:44:20 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define ITERATOR_TRAITS_HPP
 
 namespace	ft {
+
+	/*		ITERATOR CATEGORY		*/
+	struct input_iterator_tag { };
+	struct output_iterator_tag { };
+	struct forward_iterator_tag : public input_iterator_tag { };
+	struct bidirectional_iterator_tag : public forward_iterator_tag { };
+	struct random_access_iterator_tag : public bidirectional_iterator_tag { };
+
+	/*		ITERATOR TRAITS			*/
 
 	template<class It>
 	struct iterator_traits {
@@ -28,21 +37,21 @@ namespace	ft {
 	template<class T>
 	struct iterator_traits<T*> {
 
-		typedef typename std::ptrdiff_t 					difference_type;
+		typedef ptrdiff_t 									difference_type;
 		typedef T 											value_type;
 		typedef T* 											pointer;
 		typedef T& 											reference;
-		typedef typename std::random_access_iterator_tag 	iterator_category;
+		typedef typename ft::random_access_iterator_tag 	iterator_category;
 	};
 
-	template< class T >
+	template<class T>
 	struct iterator_traits<const T*> {
 
-		typedef typename std::ptrdiff_t 					difference_type;
+		typedef ptrdiff_t 									difference_type;
 		typedef const T 									value_type;
 		typedef const T* 									pointer;
 		typedef const T& 									reference;
-		typedef typename std::random_access_iterator_tag 	iterator_category;
+		typedef typename ft::random_access_iterator_tag 	iterator_category;
 	};
 }
 

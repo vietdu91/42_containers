@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:43:25 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/09 15:20:12 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/12 15:04:12 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,4 +169,20 @@ void    test_enable_if () {
     title_of_function("Enable_if");
 
     title_of_test("Test de la queue de poisson");
+}
+
+
+/*********************************************************
+ *														 *
+ *		I T E R A T O R S               				 *
+ *														 *
+ *********************************************************/
+
+# include <vector>
+
+void    test_iterators () {
+
+    title_of_function("Iterators");
+
+    title_of_test("Test du View-Master");
 }
