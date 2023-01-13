@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/12 21:28:26 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/13 14:37:08 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 	#include "../includes/std_functions/enable_if.hpp"
 	#include "../includes/iterators/iterator.hpp"
 	#include "../includes/iterators/iterator_traits.hpp"
+	#include "../includes/iterators/random_access_iterator.hpp"
 	#include "../includes/iterators/reverse_iterator.hpp"
 #endif
 

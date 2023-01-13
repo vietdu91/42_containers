@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:05:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/12 21:17:05 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/13 17:34:01 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ namespace	ft {
 
 		public:
 			typedef It iterator_type;
-			typedef typename ft::iterator_traits<It>::iterator_category 	iterator_category;
-			typedef typename ft::iterator_traits<It>::value_type 			value_type;
-			typedef typename ft::iterator_traits<It>::difference_type 		difference_type;
-			typedef typename ft::iterator_traits<It>::pointer 				pointer;
-			typedef typename ft::iterator_traits<It>::reference 			reference;
+			typedef typename iterator_traits<It>::iterator_category 	iterator_category;
+			typedef typename iterator_traits<It>::value_type 			value_type;
+			typedef typename iterator_traits<It>::difference_type 		difference_type;
+			typedef typename iterator_traits<It>::pointer 				pointer;
+			typedef typename iterator_traits<It>::reference 			reference;
 
 			/*			CONSTRUCTORS		*/
 
@@ -46,6 +46,7 @@ namespace	ft {
 
 			template <class U>
 			reverse_iterator& operator=(const reverse_iterator<U>& other) {
+
 				return (other.base());
 			}
 
@@ -56,19 +57,19 @@ namespace	ft {
 
 				It tmp = current;
 				return *(--tmp);
-			};
+			}
 
 			template <class U>
 			pointer operator->() const {
 
 				return (&(operator*()));
-			};
+			}
 
 			/*			OPERATORS TO ACCESS INDEX			*/
 
-			operator[](difference_type n) const{
+			void	operator[](difference_type n) const {
 
-				return (base()[-n-1])
+				return (base()[-n-1]);
 			}
 
 			/*			OPERATORS TO (IN)(DE)CREMENT			*/
@@ -97,24 +98,24 @@ namespace	ft {
 
 			reverse_iterator	operator+(difference_type n) const{
 
-				return (reverse_iterator(current - n))
+				return (reverse_iterator(current - n));
 			}
 
 			reverse_iterator	operator-(difference_type n) const{
 
-				return (reverse_iterator(current + n))
+				return (reverse_iterator(current + n));
 			}
 
 			reverse_iterator&	operator+=(difference_type n){
 
 				current -= n;
-				return (*this)
+				return (*this);
 			}
 
 			reverse_iterator&	operator-=(difference_type n){
 
 				current += n;
-				return (*this)
+				return (*this);
 			}
 
 		protected:
