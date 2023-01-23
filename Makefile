@@ -12,6 +12,7 @@ COMPILER	=	c++
 SRCS		=		main.cpp \
 					beauty.cpp \
 					test_std_functions.cpp \
+					test_vector.cpp \
 
 INCLUDES	=		includes/test.hpp \
 					includes/colors.hpp \

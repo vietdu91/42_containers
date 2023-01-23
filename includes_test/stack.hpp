@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:34:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 17:14:41 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/23 20:08:39 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ namespace ft {
 			explicit stack(const Container& cont = Container()) {
 
 				this->c = cont;
-				return;
-			}
-
-			stack(const stack& other) {
-
-				this->c = other.c;
 				return;
 			}
 
@@ -74,7 +68,7 @@ namespace ft {
 				return (c.back());
 			}
 
-			const_reference top() {
+			const_reference top() const {
 
 				return (c.back());
 			}
@@ -108,7 +102,7 @@ namespace ft {
 
 			void	pop() {
 
-				return (this->c.pop_back);
+				return (this->c.pop_back());
 			}
 
 			protected:

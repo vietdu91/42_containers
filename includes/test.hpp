@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/13 14:37:08 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/23 18:12:22 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <cstddef>
 # include <stddef.h>
 # include <memory>
+# include <vector>
 # include "colors.hpp"
 
 #if STD
@@ -41,6 +42,7 @@
 	#include "../includes/iterators/iterator_traits.hpp"
 	#include "../includes/iterators/random_access_iterator.hpp"
 	#include "../includes/iterators/reverse_iterator.hpp"
+	#include "../includes/containers/vector.hpp"
 #endif
 
 
@@ -78,5 +80,14 @@ void	test_make_pair();
 
 void	test_enable_if();
 
+
+
+
+void	compare_and_print(size_t p1, size_t p2);
+
+template <class InputIterator1, class InputIterator2>
+void	compare_vector_and_print(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2);
+
+int 	test_vector();
 
 #endif

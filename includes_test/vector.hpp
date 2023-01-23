@@ -6,14 +6,21 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:36 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 19:13:22 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/23 20:02:39 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
-
-# include "../test.hpp"
+# include <memory>
+# include "./iterator.hpp"
+# include "./reverse_iterator.hpp"
+# include "./equal.hpp"
+# include "./enable_if.hpp"
+# include "./lexicographical_compare.hpp"
+# include "./is_integral.hpp"
+# include "./random_access_iterator.hpp"
+# include <iostream>
 
 namespace	ft {
 
@@ -272,7 +279,7 @@ namespace	ft {
 				if (empty())
 					return (end());
 				difference_type n = ft::distance(first, last);
-				iterator begin = begin();
+				iterator begin = this->begin();
 				while (begin != first)
 					begin++;
 				for (; first != last; first++)
@@ -311,7 +318,7 @@ namespace	ft {
 				_capacity = other._capacity;
 				_size = other._size;
 
-				other._alloc = tmp_allocator;
+				other._allocator = tmp_allocator;
 				other._data = tmp_data;
 				other._capacity = tmp_capacity;
 				other._size = tmp_size;
@@ -346,12 +353,12 @@ namespace	ft {
 
 	template <class T, class Alloc>
 	bool operator==( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs ){
-		return ((lhs.size == rhs.size) && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		return ((lhs.size() == rhs.size()) && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
 
 	template <class T, class Alloc>
 	bool operator!=( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs ){
-		return (!(lhs.size == rhs.size) && !(ft::equal(lhs.begin(), lhs.end(), rhs.begin())));
+		return (!(lhs.size() == rhs.size()) && !(ft::equal(lhs.begin(), lhs.end(), rhs.begin())));
 	}
 
 	template <class T, class Alloc>

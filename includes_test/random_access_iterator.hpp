@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:34:43 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 19:16:38 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/23 19:29:52 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ namespace	ft {
 
 			template <class U>
 			random_access_iterator& operator=(const random_access_iterator<U>& other) {
-				if (this != &other)
-					current = other.base();
+				current = other.base();
 				return (*this);
 			}
 
@@ -65,9 +64,9 @@ namespace	ft {
 
 			/*			OPERATORS TO ACCESS INDEX			*/
 
-			void	operator[](difference_type n) const {
+			reference	operator[](difference_type n) {
 
-				return (base()[n]);
+				return (current[n]);
 			}
 
 			/*			OPERATORS TO (IN)(DE)CREMENT			*/

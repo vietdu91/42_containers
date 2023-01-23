@@ -6,12 +6,14 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:05:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 18:48:10 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/23 19:47:47 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
+
+# include "iterator_traits.hpp"
 
 namespace	ft {
 
@@ -43,8 +45,7 @@ namespace	ft {
 			}
 
 			/*			OPERATORS =			*/
-			reverse_iterator& operator=(const reverse_iterator& other) {
-
+			iterator_type operator=(const reverse_iterator& other) {
 				return (other.base());
 			}
 
@@ -56,15 +57,14 @@ namespace	ft {
 				return *(--tmp);
 			}
 
-			template <class U>
 			pointer operator->() const {
 
-				return (&(operator*()));
+				return (&(**this));
 			}
 
 			/*			OPERATORS TO ACCESS INDEX			*/
 
-			void	operator[](difference_type n) const {
+			reference	operator[](difference_type n) const {
 
 				return (base()[-n-1]);
 			}
@@ -83,14 +83,16 @@ namespace	ft {
 
 			reverse_iterator	operator++(int){
 
-				reverse_iterator tmp = *(--this);
+				reverse_iterator tmp = *(this);
+				--(*this);
 				return (tmp);
 			}
 
 			reverse_iterator	operator--(int){
 
-				reverse_iterator tmp = *(++this);
-				return (tmp);
+				reverse_iterator tmp = *(this);
+				++(*this);
+				return(tmp);
 			}
 
 			reverse_iterator	operator+(difference_type n) const{
