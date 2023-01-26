@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:34:43 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 19:29:52 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/26 16:34:08 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,38 @@ namespace	ft {
 
 		public:
 			// typedef It iterator_type;
-			typedef typename ft::iterator_traits<It*>::iterator_category 	iterator_category;
-			typedef typename ft::iterator_traits<It*>::value_type 			value_type;
-			typedef typename ft::iterator_traits<It*>::difference_type 		difference_type;
-			typedef typename ft::iterator_traits<It*>::pointer 				pointer;
-			typedef typename ft::iterator_traits<It*>::reference 			reference;
+			typedef typename ft::iterator_traits<It>::iterator_category 	iterator_category;
+			typedef typename ft::iterator_traits<It>::value_type 			value_type;
+			typedef typename ft::iterator_traits<It>::difference_type 		difference_type;
+			typedef typename ft::iterator_traits<It>::pointer 				pointer;
+			typedef typename ft::iterator_traits<It>::reference 			reference;
 
 			/*			CONSTRUCTORS		*/
 
-			random_access_iterator() : current(NULL) {};
+			explicit random_access_iterator() : current(NULL) {};
 
-			random_access_iterator(pointer x) : current(x) {};
+			explicit random_access_iterator(pointer const x) : current(x) {};
 
 			template<class U>
 			random_access_iterator(const random_access_iterator<U>& other) : current(other.base()) {};
 
+			random_access_iterator(const random_access_iterator& other){
+
+				*this = other;
+			};
+
+
 			/*			BASE			*/
 
-			pointer base() const{
+			const pointer base() const{
 
 				return (current);
 			}
 
 			/*			OPERATORS =			*/
 
-			template <class U>
-			random_access_iterator& operator=(const random_access_iterator<U>& other) {
+			random_access_iterator& operator=(const random_access_iterator& other) {
+
 				current = other.base();
 				return (*this);
 			}
@@ -59,7 +65,7 @@ namespace	ft {
 
 			pointer operator->() const {
 
-				return (&(operator*()));
+				return (current);
 			}
 
 			/*			OPERATORS TO ACCESS INDEX			*/
@@ -72,37 +78,47 @@ namespace	ft {
 			/*			OPERATORS TO (IN)(DE)CREMENT			*/
 
 			random_access_iterator&	operator++(){
-				++current;
+				current++;
 				return(*(this));
 			}
 
 			random_access_iterator&	operator--(){
-				--current;
+				current--;
 				return(*(this));
 			}
 
 			random_access_iterator	operator++(int){
 
-				random_access_iterator tmp = *(this);
+				random_access_iterator tmp(*this);
 				current++;
 				return (tmp);
 			}
 
 			random_access_iterator	operator--(int){
 
-				random_access_iterator tmp = *(this);
+				random_access_iterator tmp(*this);
 				current--;
 				return (tmp);
 			}
 
 			random_access_iterator	operator+(difference_type n) const{
 
-				return (current + n);
+				return (random_access_iterator(current + n));
+			}
+
+			difference_type	operator+(random_access_iterator n) const{
+
+				return (current + n.current);
 			}
 
 			random_access_iterator	operator-(difference_type n) const{
 
-				return (current - n);
+				return (random_access_iterator(current - n));
+			}
+
+			difference_type	operator-(random_access_iterator n) const{
+
+				return (current - n.current);
 			}
 
 			random_access_iterator&	operator+=(difference_type n){
@@ -171,9 +187,15 @@ namespace	ft {
 	random_access_iterator<It>	operator+(typename random_access_iterator<It>::difference_type n, \
                						const random_access_iterator<It>& it) {
 
-		return (random_access_iterator<It>(it.base() - n));
+		return (random_access_iterator<It>(it.base() + n));
 	}
 
+	template<class It>
+	random_access_iterator<It>	operator-(typename random_access_iterator<It>::difference_type n, \
+               						const random_access_iterator<It>& it) {
+
+		return (random_access_iterator<It>(it.base() - n));
+	}
 
 	/*			OPERATORS TO COMPUTE THE DISTANCE BETWEEN TWO ITERATOR ADAPTORS			*/
 
@@ -181,7 +203,14 @@ namespace	ft {
 	typename random_access_iterator<It1>::difference_type	operator-(const random_access_iterator<It1>& lhs, \
                												const random_access_iterator<It2>& rhs) {
 
-		return (rhs.base() - lhs.base());
+		return (lhs.base() - rhs.base());
+	}
+
+	template<class It1, class It2>
+	typename random_access_iterator<It1>::difference_type	operator+(const random_access_iterator<It1>& lhs, \
+               												const random_access_iterator<It2>& rhs) {
+
+		return (lhs.base() + rhs.base());
 	}
 }
 #endif
