@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:18:43 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/03 19:43:08 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:29:17 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 namespace	ft {
 
 /*		BASIC		*/
+
 
 	template <class T>
 	struct is_integral {
@@ -52,10 +53,6 @@ namespace	ft {
 		static const bool value = true;
 	};
 
-	template<>
-	struct is_integral<long long> {
-		static const bool value = true;
-	};
 
 /*		SIGNED AND UNSIGNED		*/
 
@@ -76,11 +73,6 @@ namespace	ft {
 
 	template<>
 	struct is_integral<unsigned long> {
-		static const bool value = true;
-	};
-
-	template<>
-	struct is_integral<unsigned long long> {
 		static const bool value = true;
 	};
 
@@ -116,11 +108,6 @@ namespace	ft {
 		static const bool value = true;
 	};
 
-	template<>
-	struct is_integral<const long long> {
-		static const bool value = true;
-	};
-
 /*		VOLATILE		*/
 
 	template<>
@@ -150,11 +137,6 @@ namespace	ft {
 
 	template<>
 	struct is_integral<volatile long> {
-		static const bool value = true;
-	};
-
-	template<>
-	struct is_integral<volatile long long> {
 		static const bool value = true;
 	};
 }
