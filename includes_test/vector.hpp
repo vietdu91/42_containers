@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:36 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/29 18:48:06 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/30 15:11:33 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,18 @@ namespace	ft {
 				return (*this);
 
 			};
+
+
+			// **************************************************
+			// ================    Allocator    =================
+			// **************************************************
+
+			allocator_type	get_allocator()const {
+
+				return (_allocator);
+
+			}
+
 
 			// **************************************************
 			// ================    Destructor    ================
@@ -410,6 +422,7 @@ namespace	ft {
 			void	push_back(const value_type& val) {
 
 				if (_size + 1 > _capacity){
+					
 					if (empty())
 						reserve(1);
 					else
@@ -421,6 +434,7 @@ namespace	ft {
 			};
 
 			void	pop_back() {
+
 				if (_size > 0) {
 
 					_size--;
@@ -482,12 +496,6 @@ namespace	ft {
 				 	push_back(val);
 
 			};
-
-			allocator_type	get_allocator()const {
-
-				return (_allocator);
-
-			}
 
 		private:
 			pointer _data;

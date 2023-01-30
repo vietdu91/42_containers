@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 18:12:22 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:43:24 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,21 @@
 	namespace ft = std;
 #else
 	#define _NAMESPACE	"FT"
-	#include "../includes/std_functions/equal.hpp"
-	#include "../includes/std_functions/lexicographical_compare.hpp"
-	#include "../includes/std_functions/is_integral.hpp"
-	#include "../includes/std_functions/pair.hpp"
-	#include "../includes/std_functions/enable_if.hpp"
-	#include "../includes/iterators/iterator.hpp"
+	#include "../includes/containers/map.hpp"
+	#include "../includes/containers/stack.hpp"
+	#include "../includes/containers/vector.hpp"
 	#include "../includes/iterators/iterator_traits.hpp"
+	#include "../includes/iterators/iterator.hpp"
 	#include "../includes/iterators/random_access_iterator.hpp"
 	#include "../includes/iterators/reverse_iterator.hpp"
-	#include "../includes/containers/vector.hpp"
+	#include "../includes/RBT/node.hpp"
+	#include "../includes/RBT/RBiterator.hpp"
+	#include "../includes/RBT/RBtree.hpp"
+	#include "../includes/std_functions/enable_if.hpp"
+	#include "../includes/std_functions/equal.hpp"
+	#include "../includes/std_functions/is_integral.hpp"
+	#include "../includes/std_functions/lexicographical_compare.hpp"
+	#include "../includes/std_functions/pair.hpp"
 #endif
 
 

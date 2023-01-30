@@ -6,20 +6,18 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:34:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 17:14:41 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:33:35 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_HPP
 # define STACK_HPP
 
-# include <vector>
-
-// A MODIFIER : <vector> vers notre vector implemente
+# include "./vector.hpp"
 
 namespace ft {
 
-	template< class T, class Container = std::vector<T> >
+	template< class T, class Container = ft::vector<T> >
 	class stack {
 
 		public:
@@ -34,12 +32,6 @@ namespace ft {
 			explicit stack(const Container& cont = Container()) {
 
 				this->c = cont;
-				return;
-			}
-
-			stack(const stack& other) {
-
-				this->c = other.c;
 				return;
 			}
 
@@ -74,7 +66,7 @@ namespace ft {
 				return (c.back());
 			}
 
-			const_reference top() {
+			const_reference top() const {
 
 				return (c.back());
 			}
@@ -108,7 +100,7 @@ namespace ft {
 
 			void	pop() {
 
-				return (this->c.pop_back);
+				return (this->c.pop_back());
 			}
 
 			protected:

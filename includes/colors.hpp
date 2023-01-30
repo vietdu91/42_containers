@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:53:50 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/03 14:58:23 by emtran           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:48:47 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define COLORS_HPP
 
 # define DEFAULT	"\033[0;39m"
-# define BLACK		"\033[0;30m"
-# define RED		"\033[0;31m"
+//# define BLACK		"\033[0;30m"
+# define RED_C		"\033[0;31m"
 # define RED_B		"\033[1;31m"
 # define L_RED		"\033[0;91m"
 # define GREEN		"\033[0;32m"
