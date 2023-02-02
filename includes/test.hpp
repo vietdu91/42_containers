@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/30 18:43:24 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:18:55 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <utility>
 # include <cstddef>
 # include <stddef.h>
+# include <stdio.h>
 # include <memory>
 # include <vector>
 # include "colors.hpp"
@@ -94,5 +95,7 @@ template <class InputIterator1, class InputIterator2>
 void	compare_vector_and_print(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2);
 
 int 	test_vector();
+
+void	test_map();
 
 #endif

@@ -1,5 +1,5 @@
-objs/main.o: srcs/main.cpp srcs/../includes/test.hpp includes/colors.hpp \
-  includes/../includes/containers/map.hpp \
+objs/test_vector.o: srcs/test_vector.cpp srcs/../includes/test.hpp \
+  includes/colors.hpp includes/../includes/containers/map.hpp \
   includes/../includes/containers/../std_functions/pair.hpp \
   includes/../includes/containers/../std_functions/equal.hpp \
   includes/../includes/containers/../std_functions/lexicographical_compare.hpp \

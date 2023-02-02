@@ -13,12 +13,25 @@ SRCS		=		main.cpp \
 					beauty.cpp \
 					test_std_functions.cpp \
 					test_vector.cpp \
+					test_map.cpp \
 
 INCLUDES	=		includes/test.hpp \
 					includes/colors.hpp \
+					includes/containers/map.hpp \
+					includes/containers/stack.hpp \
+					includes/containers/vector.hpp \
+					includes/iterators/iterator_traits.hpp \
+					includes/iterators/iterator.hpp \
+					includes/iterators/random_access_iterator.hpp \
+					includes/iterators/reverse_iterator.hpp \
+					includes/RBT/node.hpp \
+					includes/RBT/RBiterator.hpp \
+					includes/RBT/RBtree.hpp \
+					includes/std_functions/enable_if.hpp \
 					includes/std_functions/equal.hpp \
 					includes/std_functions/is_integral.hpp \
 					includes/std_functions/lexicographical_compare.hpp \
+					includes/std_functions/pair.hpp \
 
 	# Colors Foreground #
 

@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:05:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/26 15:53:42 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 13:44:51 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ namespace	ft {
 			}
 
 			/*			OPERATORS =			*/
-			// iterator_type operator=(const reverse_iterator& other) {
-			// 	return (other.base());
-			// }
+
+			reverse_iterator& operator=(const reverse_iterator& other) {
+
+				return (other.base());
+			}
 
 			/*			OPERATORS POINTED-TO ELEMENT			*/
 
@@ -86,14 +88,14 @@ namespace	ft {
 			reverse_iterator	operator++(int){
 
 				reverse_iterator tmp(*this);
-				--(this->current);
+				--current;
 				return (tmp);
 			}
 
 			reverse_iterator	operator--(int){
 
 				reverse_iterator tmp(*this);
-				++(this->current);
+				++current;
 				return(tmp);
 			}
 

@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:41:19 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/29 18:53:00 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:01:26 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ namespace ft {
 			// **************************************************
 
 			bool is_null(){
-				return (parent == NULL && left == NULL && right == NULL);
+				return (parent == NULL);
 			}
 
 			void	swap(Node&	other){

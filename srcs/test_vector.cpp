@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:59:09 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/23 18:48:39 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 13:06:09 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	compare_and_print(size_t p1, size_t p2){
 	if (p1 == p2)
 		std::cout << GREEN <<"[OK]" << RESET;
 	else
-		std::cout << RED << "[KO]" << RESET;
+		std::cout << PINK << "[KO]" << RESET;
 }
 
 template <class InputIterator1, class InputIterator2>
@@ -24,7 +24,7 @@ void	compare_vector_and_print(InputIterator1 first1, InputIterator1 last1, Input
 	if (ft::equal(first1, last1, first2))
 		std::cout << GREEN <<"[OK]" << RESET;
 	else
-		std::cout << RED << "[KO]" << RESET;
+		std::cout << PINK << "[KO]" << RESET;
 }
 
 int test_vector(){
@@ -116,26 +116,26 @@ int test_vector(){
 	bool ko = false;
 
 	if (ft5.front()!=std5.front())
-		std::cout << RED << "[KO with front operator] " << RESET;
+		std::cout << PINK << "[KO with front operator] " << RESET;
 	else
 		std::cout << GREEN <<"[OK]" << RESET;
 	if (ft5.back() != std5.back())
-		std::cout << RED << "[KO with back operator] " << RESET;
+		std::cout << PINK << "[KO with back operator] " << RESET;
 	else
 		std::cout << GREEN <<"[OK]" << RESET;
 	for (; it_ft != ft5.end();it_ft++){
 		if (*it_ft != *it_std){
-			std::cout << RED << "[KO with iterator*]" << RESET;
+			std::cout << PINK << "[KO with iterator*]" << RESET;
 			ko = true;
 			break;
 		}
 		if (ft5[index]!=std5[index]){
-			std::cout << RED << "[KO with [] operator] " << RESET;
+			std::cout << PINK << "[KO with [] operator] " << RESET;
 			ko = true;
 			break;
 		}
 		if (ft5.at(index)!=std5.at(index)){
-			std::cout << RED << "[KO with at() operator] " << RESET;
+			std::cout << PINK << "[KO with at() operator] " << RESET;
 			ko = true;
 			break;
 		}

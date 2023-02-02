@@ -1,4 +1,5 @@
-objs/main.o: srcs/main.cpp srcs/../includes/test.hpp includes/colors.hpp \
+objs/test_std_functions.o: srcs/test_std_functions.cpp \
+  srcs/../includes/test.hpp includes/colors.hpp \
   includes/../includes/containers/map.hpp \
   includes/../includes/containers/../std_functions/pair.hpp \
   includes/../includes/containers/../std_functions/equal.hpp \

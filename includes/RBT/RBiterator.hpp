@@ -6,17 +6,20 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:53:28 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/29 19:03:59 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:37:23 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RBITERATOR_HPP
 # define RBITERATOR_HPP
 
+# include "../iterators/iterator_traits.hpp"
+# include "../iterators/iterator.hpp"
+
 namespace ft {
 
 	template <class Pair, class Node>
-	struct	RBiterator{
+	struct	RBiterator :  public ft::iterator<std::bidirectional_iterator_tag, Pair> {
 
 		public:
 
@@ -37,19 +40,19 @@ namespace ft {
 
 			RBiterator() : _node(NULL) {};
 
-			template <class Node>
-			explicit RBiterator(Node* other):_node(other){};
+			template<class other_Node>
+			explicit RBiterator(other_Node* other): _node(other){};
 
-			template<class Pair, class Node>
-			RBiterator(RBiterator<Pair, Node> const& x) : _node(x.base()) {};
+			template<class other_Pair, class other_Node>
+			RBiterator(RBiterator<other_Pair, other_Node> const& x) : _node(x.base()) {};
 
 
 			// ****************************************************
 			// ================    Copy Assign.    ================
 			// ****************************************************
 
-			template<class Pair, class Node>
-			RBiterator& operator=(RBiterator<Pair const, Node> const& x) {
+			template<class other_Pair, class other_Node>
+			RBiterator& operator=(RBiterator<other_Pair const, other_Node> const& x) {
 
 				if (this != &x)
 					this->_node = x._node;
@@ -111,7 +114,7 @@ namespace ft {
 
 				else {
 
-					while (_node->parent != NULL && _node == _node->parent->right)
+					while (!(_node->parent->is_null()) && _node == _node->parent->right)
 						_node = _node->parent;
 
 					_node = _node->parent;
@@ -143,7 +146,7 @@ namespace ft {
 
 				else {
 
-					while (_node->parent != NULL && _node == _node->parent->left)
+					while (!(_node->parent->is_null()) && _node == _node->parent->left)
 						_node = _node->parent;
 
 					_node = _node->parent;

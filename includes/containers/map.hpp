@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:22:57 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/30 18:49:34 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/02 15:21:46 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,37 +142,37 @@ namespace ft{
 
 			iterator	end() {
 
-				return (iterator(_tree.end()));
+				return (iterator(_tree.nil()));
 
 			}
 
 			const_iterator	end() const {
 
-				return (const_iterator(_tree.end()));
+				return (const_iterator(_tree.nil()));
 
 			}
 
-			iterator	rbegin() {
+			reverse_iterator	rbegin() {
 
-				return (reverse_iterator(_tree.end()));
-
-			}
-
-			const_iterator	rbegin() const {
-
-				return (const_reverse_iterator(_tree.end()));
+				return (reverse_iterator(end()));
 
 			}
 
-			iterator	rend() {
+			const_reverse_iterator	rbegin() const {
 
-				return (reverse_iterator(_tree.begin()));
+				return (const_reverse_iterator(end()));
 
 			}
 
-			const_iterator	rend() const {
+			reverse_iterator	rend() {
 
-				return (const_reverse_iterator(_tree.begin()));
+				return (reverse_iterator(begin()));
+
+			}
+
+			const_reverse_iterator	rend() const {
+
+				return (const_reverse_iterator(begin()));
 
 			}
 
@@ -317,50 +317,32 @@ namespace ft{
 			// ==================    Look Up    =================
 			// **************************************************
 
-			// iterator	find(const key_type& k){
-			// 	node_type*	node = _tree.root;
+			iterator	find(const key_type& k) {
 
-			// 	while (node != TNULL){
-			// 		if (_key_comp()(k, node->value.first))
-			// 			node = node->left;
-			// 		else if (_key_comp()(node->value.first, k))
-			// 			node = node->right;
-			// 		else
-			// 			break;
-			// 	}
-			// 	return (iterator(k));
-			// }
+				return (_find<iterator>(k));
+			}
 
-			// const_iterator	find(const key_type& k){
-			// 	node_type*	node = _tree.root;
+			const_iterator	find(const key_type& k) const {
 
-			// 	while (node != TNULL){
-			// 		if (_key_comp()(k, node->value.first))
-			// 			node = node->left;
-			// 		else if (_key_comp()(node->value.first, k))
-			// 			node = node->right;
-			// 		else
-			// 			break;
-			// 	}
-			// 	return (const_iterator(k));
-			// }
+				return (_find<const_iterator>(k));
+			}
 
 			template <class It>
-			It	find(const key_type& k) {
+			It	_find(const key_type& k) {
 
-				node_type*	node = _tree.root;
+				node_type*	node = _tree.root();
 
-				while (node->is_null()) {
+				while (!node->is_null()) {
 
-					if (_key_comp()(k, node->value.first))
+					if (_key_comp(k, node->value.first))
 						node = node->left;
-					else if (_key_comp()(node->value.first, k))
+					else if (_key_comp(node->value.first, k))
 						node = node->right;
 					else
 						break;
 				}
 
-				return (It(k));
+				return (It(node));
 			}
 
 			size_type	count(const key_type& k) {
@@ -384,7 +366,7 @@ namespace ft{
 
 				for (; first != end(); first++) {
 
-					if (!_key_comp()((*first).first, k))
+					if (!_key_comp((*first).first, k))
 						break;
 				}
 
@@ -398,7 +380,7 @@ namespace ft{
 
 				for (; first != end(); first++){
 
-					if (!_key_comp()((*first).first, k))
+					if (!_key_comp((*first).first, k))
 						break;
 				}
 
@@ -412,7 +394,7 @@ namespace ft{
 
 				for (; first != end(); first++) {
 
-					if (!_key_comp()((*first).first, k))
+					if (_key_comp(k,(*first).first))
 						break;
 				}
 
@@ -426,7 +408,7 @@ namespace ft{
 
 				for (; first != end(); first++){
 
-					if (_key_comp()(k, (*first).first))
+					if (_key_comp(k, (*first).first))
 						break;
 				}
 
