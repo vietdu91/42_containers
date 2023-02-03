@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:13:27 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/02 15:16:48 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 20:24:19 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ namespace ft {
 				_root(_TNULL),
 				_begin(_TNULL),
 				_end(_TNULL),
-				_comp(other.comp),
+				_comp(other._comp),
 				_size(other._size) {
 
 				_root = copy_tree(other,other._root, _TNULL);
@@ -615,7 +615,7 @@ namespace ft {
 					_begin = new_node;
 				if (current_node == other._end)
 					_end = new_node;
-				if (current_node == other.current_node)
+				if (current_node == other._root)
 					_root = new_node;
 				new_node->left = copy_tree(other, current_node->left, new_node);
 				new_node->right = copy_tree(other, current_node->right, new_node);

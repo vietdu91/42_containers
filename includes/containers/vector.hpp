@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:36 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/30 18:50:06 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:35:20 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,11 +241,13 @@ namespace	ft {
 
 					pointer tmp = _allocator.allocate(n);
 
-					for (size_type i = 0; i < _size; i++)
-						_allocator.construct(tmp + i, _data[i]);
+					for (size_type i = 0; i < _size; i++) {
 
-					for (size_type i = 0; i < _size; i++)
+						_allocator.construct(tmp + i, _data[i]);
 						_allocator.destroy(_data + i);
+					}
+
+//					for (size_type i = 0; i < _size; i++)
 
 					if (_capacity > 0)
 						_allocator.deallocate(_data, _capacity);
@@ -336,31 +338,46 @@ namespace	ft {
 			};
 
 			void	insert(iterator pos, size_type count, const T& value) {
+
 				size_type index = pos - this->begin();
+				typename ft::vector<T, Allocator>::size_type	total;
 
 				if (count) {
 
+					total = _size + count;
+					// std::cout << "Total : " << total << std::endl;
+					// std::cout << "Capacity : " << _capacity << std::endl;
+					if (total < _capacity)
+						return ;
 					if (_size + count  > _capacity) {
 
-						if (_size + count > _capacity * 2)
-							reserve(_size + count);
-
+						if (!_capacity)
+							reserve(1);
 						else
 							reserve(_size * 2);
+						if (_capacity < total)
+							reserve(total);
+
+						// if (_size + count > _capacity * 2) {
+						// 	reserve(_size + count);
+						// }
+
+						// else
+						// 	reserve(_size * 2);
 
 					}
 
-					for (size_type i = this->_size; i > index; i--) {
+					for (size_type i = _size; i > index; i--) {
 
-						this->_allocator.construct(this->_data + i + count - 1,
-											   *(this->_data + i - 1));
-						this->_allocator.destroy(this->_data + i - 1);
+						_allocator.construct(_data + i + count - 1,
+											   *(_data + i - 1));
+						_allocator.destroy(_data + i - 1);
 					}
 
 					for (size_type i = 0; i < count; i++) {
 
-						this->_allocator.construct(this->_data + index + i, value);
-						this->_size++;
+						_allocator.construct(_data + index + i, value);
+						_size++;
 					}
 
 				}

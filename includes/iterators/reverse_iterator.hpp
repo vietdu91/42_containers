@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:05:55 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/02 13:44:51 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 20:37:00 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ namespace	ft {
 
 			reverse_iterator& operator=(const reverse_iterator& other) {
 
-				return (other.base());
+				this->current = other.base();
+				return (*this);
 			}
 
 			/*			OPERATORS POINTED-TO ELEMENT			*/

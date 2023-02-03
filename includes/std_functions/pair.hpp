@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:12:17 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/05 17:34:14 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 15:16:44 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ namespace	ft {
 	template<class T1, class T2>
 	bool operator<=(const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs) {
 
-		return (!rhs < lhs);
+		return (!(rhs < lhs));
 	};
 
 	template<class T1, class T2>
@@ -93,7 +93,7 @@ namespace	ft {
 	template<class T1, class T2>
 	bool operator>=(const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs) {
 
-		return (!lhs < rhs);
+		return (!(lhs < rhs));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:26:40 by emtran            #+#    #+#             */
-/*   Updated: 2023/01/12 14:44:20 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 16:14:20 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ namespace	ft {
 	template<class T>
 	struct iterator_traits<T*> {
 
-		typedef ptrdiff_t 									difference_type;
+		typedef std::ptrdiff_t 								difference_type;
 		typedef T 											value_type;
 		typedef T* 											pointer;
 		typedef T& 											reference;
@@ -47,7 +47,7 @@ namespace	ft {
 	template<class T>
 	struct iterator_traits<const T*> {
 
-		typedef ptrdiff_t 									difference_type;
+		typedef std::ptrdiff_t 								difference_type;
 		typedef const T 									value_type;
 		typedef const T* 									pointer;
 		typedef const T& 									reference;

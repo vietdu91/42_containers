@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/02 14:18:55 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 15:45:57 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <stdio.h>
 # include <memory>
 # include <vector>
+# include <stack>
+# include <deque>
+# include <map>
+# include <set>
 # include "colors.hpp"
 
 #if STD
@@ -37,6 +41,7 @@
 	#include "../includes/containers/map.hpp"
 	#include "../includes/containers/stack.hpp"
 	#include "../includes/containers/vector.hpp"
+	#include "../includes/containers/set.hpp"
 	#include "../includes/iterators/iterator_traits.hpp"
 	#include "../includes/iterators/iterator.hpp"
 	#include "../includes/iterators/random_access_iterator.hpp"

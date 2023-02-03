@@ -6,11 +6,14 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:48:56 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/02 14:35:40 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/03 15:21:30 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/test.hpp"
+
+#define T1 int
+#define T2 int
 
 int main()
 {
