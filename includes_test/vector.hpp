@@ -6,20 +6,20 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:36 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/06 19:08:17 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/06 19:32:06 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 # include <memory>
-# include "../iterators/iterator.hpp"
-# include "../iterators/reverse_iterator.hpp"
-# include "../std_functions/equal.hpp"
-# include "../std_functions/enable_if.hpp"
-# include "../std_functions/lexicographical_compare.hpp"
-# include "../std_functions/is_integral.hpp"
-# include "../iterators/random_access_iterator.hpp"
+# include "iterator.hpp"
+# include "reverse_iterator.hpp"
+# include "equal.hpp"
+# include "enable_if.hpp"
+# include "lexicographical_compare.hpp"
+# include "is_integral.hpp"
+# include "random_access_iterator.hpp"
 # include <iostream>
 
 namespace	ft {

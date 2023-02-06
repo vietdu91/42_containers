@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:22:57 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/03 21:43:02 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/06 19:00:19 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ namespace ft {
 
 		public:
 
-			class 												value_compare;
-			typedef	Key											key_type;
-			typedef	T											mapped_type;
-			typedef	ft::pair<const key_type, mapped_type>		value_type;
-			typedef	Compare										key_compare;
-			typedef	Allocator									allocator_type;
-			typedef typename allocator_type::reference			reference;
-			typedef typename allocator_type::const_reference	const_reference;
-			typedef	typename allocator_type::pointer			pointer;
-			typedef	typename allocator_type::const_pointer		const_pointer;
-			typedef	ft::RBiterator<value_type, node_type>		iterator;
-			typedef	ft::RBiterator<const value_type, node_type>	const_iterator;
-			typedef	ft::reverse_iterator<iterator>				reverse_iterator;
-			typedef	ft::reverse_iterator<const_iterator>		const_reverse_iterator;
-			typedef	typename std::size_t						size_type;
-			typedef	typename std::ptrdiff_t						difference_type;
+			class 														value_compare;
+			typedef	Key													key_type;
+			typedef	T													mapped_type;
+			typedef	ft::pair<const key_type, mapped_type>				value_type;
+			typedef	Compare												key_compare;
+			typedef	Allocator											allocator_type;
+			typedef typename allocator_type::reference					reference;
+			typedef typename allocator_type::const_reference			const_reference;
+			typedef	typename allocator_type::pointer					pointer;
+			typedef	typename allocator_type::const_pointer				const_pointer;
+			typedef	ft::RBiterator<value_type, node_type>				iterator;
+			typedef	ft::RBiterator<const value_type, const node_type>	const_iterator;
+			typedef	ft::reverse_iterator<iterator>						reverse_iterator;
+			typedef	ft::reverse_iterator<const_iterator>				const_reverse_iterator;
+			typedef	typename std::size_t								size_type;
+			typedef	typename std::ptrdiff_t								difference_type;
 
 		private:
 
@@ -344,18 +344,8 @@ namespace ft {
 			}
 
 			size_type	count(const key_type& k) const {
-
-				iterator position = begin();
-
-				for (; position != end(); position++) {
-
-					if ((*position).first == k)
-						break;
-				}
-
-				if (position == end())
-					return (0);
-				return (1);
+				
+				return (find(k) == end() ? 0 : 1);
 			}
 
 			iterator lower_bound(const key_type& k) {
@@ -374,7 +364,7 @@ namespace ft {
 
 			const_iterator lower_bound(const key_type& k) const {
 
-				iterator first = begin();
+				const_iterator first = begin();
 
 				for (; first != end(); first++){
 
@@ -402,7 +392,7 @@ namespace ft {
 
 			const_iterator upper_bound(const key_type& k) const {
 
-				iterator first = begin();
+				const_iterator first = begin();
 
 				for (; first != end(); first++){
 
