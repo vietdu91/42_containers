@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:36 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/06 19:32:06 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:10:38 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,8 +246,6 @@ namespace	ft {
 						_allocator.construct(tmp + i, _data[i]);
 						_allocator.destroy(_data + i);
 					}
-
-//					for (size_type i = 0; i < _size; i++)
 
 					if (_capacity > 0)
 						_allocator.deallocate(_data, _capacity);

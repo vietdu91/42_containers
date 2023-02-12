@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/03 15:45:57 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:53:42 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 	#include "../includes/containers/map.hpp"
 	#include "../includes/containers/stack.hpp"
 	#include "../includes/containers/vector.hpp"
-	#include "../includes/containers/set.hpp"
 	#include "../includes/iterators/iterator_traits.hpp"
 	#include "../includes/iterators/iterator.hpp"
 	#include "../includes/iterators/random_access_iterator.hpp"
@@ -56,10 +55,10 @@
 	#include "../includes/std_functions/pair.hpp"
 #endif
 
-
 /*			B E A U T Y			*/
 
 void    intro_std_functions();
+void    intro_vector();
 void 	title_of_test(const std::string& s);
 void 	title_of_function(const std::string& s);
 
