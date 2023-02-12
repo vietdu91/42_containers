@@ -6,13 +6,13 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:27:32 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/02 15:04:29 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/12 20:56:49 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/test.hpp"
 
-void test_map() {
+void test_de_l_humanite() {
 
 	ft::map<std::string, int> test_insert;
 
@@ -1026,9 +1026,9 @@ void test_map() {
 	std::cout << test_insert.lower_bound("sixteen")->first<< std::endl;
 	std::cout << test_insert.upper_bound("sixteen")->first<< std::endl;
 	if (test_insert.find("sixteen")->first == "sixteen")
-		std::cout <<"OK"<< std::endl;
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
 	else
-		std::cout <<"NO"<< std::endl;
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
 
 	ft::map<std::string, int>::iterator erase_iterator = test_insert.begin();
 	for (; erase_iterator != test_insert.end();){
@@ -1048,7 +1048,12 @@ void test_map() {
 	std::cout << test_insert.lower_bound("sixteen")->first<< std::endl;
 	std::cout << test_insert.upper_bound("sixteen")->first<< std::endl;
 	if (test_insert.find("sixteen")->first == "sixteen")
-		std::cout <<"OK"<< std::endl;
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
 	else
-		std::cout <<"NO"<< std::endl;
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+}
+
+void	test_map() {
+
+	test_de_l_humanite();
 }

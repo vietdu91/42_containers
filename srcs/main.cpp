@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:48:56 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/12 16:52:13 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/12 20:57:04 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int main()
 	test_make_pair();
 	intro_vector();
 	test_vector();
-	//test_map();
+	test_map();
 }
