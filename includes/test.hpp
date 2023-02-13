@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:21 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/12 16:53:42 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:16:07 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 
 void    intro_std_functions();
 void    intro_vector();
+void    intro_map();
 void 	title_of_test(const std::string& s);
 void 	title_of_function(const std::string& s);
 

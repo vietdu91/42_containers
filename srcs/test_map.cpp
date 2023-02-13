@@ -6,13 +6,1618 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:27:32 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/12 20:56:49 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/13 19:12:53 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/test.hpp"
+#include <cassert>
 
-void test_de_l_humanite() {
+template <typename T1, typename T2>
+void test_default_constructor() {
+
+    ft::map<T1, T2> a;
+
+    std::cout << WHITE << "EMPTY.       " << RESET;
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE << "INSERT.      " << RESET;
+
+	a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    for (int i = 1; i < 51; i++) {
+
+		if (a.insert(ft::make_pair<T1, T2>(T1(), T2())).second == false)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 9 == 0))
+			std::cout << std::endl << "             ";
+	}
+	std::cout << std::endl;
+
+    std::cout << WHITE << "SIZE.        " << RESET;
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
+
+	typename ft::map<T1, T2>::iterator it = a.begin();
+
+    std::cout << WHITE << "INSERT.      " << RESET;
+	if (a.insert(ft::make_pair<T1, T2>(T1(), T2())).first == it)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+}
+
+void default_constructor() {
+
+	std::cout << std::endl;
+	title_of_test("Decouverte de la carte au tresor [default constructor]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET << std::endl;
+    test_default_constructor<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET << std::endl;
+    test_default_constructor<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET << std::endl;
+    test_default_constructor<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET << std::endl;
+    test_default_constructor<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET << std::endl;
+    test_default_constructor<int, std::string>();
+
+}
+
+template <typename T1, typename T2>
+void test_range_constructor() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    ft::map<T1, T2> b(a.begin(), a.end());
+
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    b.erase(b.begin());
+
+    if (b.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void range_constructor() {
+
+	std::cout << std::endl;
+
+	title_of_test("Construction du navire [range constructor]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_range_constructor<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_range_constructor<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_range_constructor<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_range_constructor<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_range_constructor<int, std::string>();
+}
+
+template <typename T1, typename T2>
+void test_copy_constructor() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    ft::map<T1, T2> b(a);
+
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    b.erase(b.begin());
+
+    if (b.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void copy_constructor() {
+
+	std::cout << std::endl;
+
+	title_of_test("Copie de la carte au tresor en cas de perte [copy constructor]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_copy_constructor<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_copy_constructor<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_copy_constructor<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_copy_constructor<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_copy_constructor<int, std::string>();
+}
+
+template <typename T1, typename T2>
+void test_assignement_operator() {
+
+    ft::map<T1, T2> a;
+    ft::map<T1, T2> b;
+
+    a = b;
+
+    if (a.empty())
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+    if (b.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    b = a;
+
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void assignement_operator() {
+
+	std::cout << std::endl;
+
+	title_of_test("Assignation des membres d'equipage [assignment operator]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_assignement_operator<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_assignement_operator<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_assignement_operator<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_assignement_operator<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_assignement_operator<int, std::string>();
+}
+
+void test_begin_end_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    a.insert(ft::make_pair<char, int>('b', 5));
+
+    if ((*(a.begin())).first == 'a')
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if ((*(++a.begin())).first == 'b')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--a.end())).first == 'b')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_begin_end() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    size_t count = 0;
+    for (typename ft::map<T1, T2>::iterator it = a.begin(); it != a.end(); it++)
+    {
+		if ((*(it)).first == T1())
+	        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+		else
+	    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+		if ((*(it)).second == T2())
+	        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+	    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+        count++;
+    }
+
+	if (count == a.size() && count == 1)
+	    std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void begin_end() {
+
+	std::cout << std::endl;
+
+	title_of_test("Tracage du trajet vers le tresor [begin end]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_begin_end_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_begin_end<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_begin_end<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_begin_end<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_begin_end<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_begin_end<int, std::string>();
+}
+
+void test_rbegin_rend_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    a.insert(ft::make_pair<char, int>('b', 5));
+
+    if ((*(a.rbegin())).first == 'b')
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if ((*(++a.rbegin())).first == 'a')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--a.rend())).first == 'a')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_rbegin_rend() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    size_t count = 0;
+    for (typename ft::map<T1, T2>::reverse_iterator it = a.rbegin(); it != a.rend(); it++)
+    {
+		if ((*(it)).first == T1())
+	        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+		else
+	    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+		if ((*(it)).second == T2())
+	        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+	    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+        count++;
+    }
+    assert(count == a.size() && count == 1);
+
+	std::cout << std::endl;
+}
+
+void rbegin_rend() {
+
+	std::cout << std::endl;
+
+	title_of_test("Calcul du trajet retour vers la maison [rbgin rend]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_rbegin_rend_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_rbegin_rend<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_rbegin_rend<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_rbegin_rend<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_rbegin_rend<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_rbegin_rend<int, std::string>();
+}
+
+template <typename T1, typename T2>
+void test_empty() {
+
+    ft::map<T1, T2> a;
+
+    if (a.empty())
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    if (!a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void empty() {
+
+	std::cout << std::endl;
+
+	title_of_test("Verification des rations s'ils ne sont pas vides [empty]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_empty<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_empty<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_empty<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_empty<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_empty<int, std::string>();
+}
+
+template <typename T1, typename T2>
+void test_size() {
+
+    ft::map<T1, T2> a;
+
+    if (a.size() == 0)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+	for (int i = 0; i < 50; i++)
+		a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+	if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+    if (a.size() == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void size() {
+
+	std::cout << std::endl;
+
+	title_of_test("Calcul des rations [size]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_size<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_size<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_size<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_size<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_size<int, std::string>();
+}
+
+void max_size() {
+
+	std::cout << std::endl;
+
+    ft::map<char, int> a;
+
+	title_of_test("Stock max des rations dans le navire [max_size]");
+
+    std::cout << WHITE_B << "1. " << RESET;
+    if (a.max_size() == 230584300921369395)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_operator_access_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    a.insert(ft::make_pair<char, int>('b', 5));
+    a.insert(ft::make_pair<char, int>('c', 5));
+    a.insert(ft::make_pair<char, int>('d', 5));
+
+    if (a['a'] == 5)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a['b'] == 5)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a['c'] == 5)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a['d'] == 5)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a['e'] = 10;
+
+    if (a['e'] == 10)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.size() == 5)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a['f'];
+
+    if (a.size() == 6)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a['f'];
+
+    if (a.size() == 6)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a['a'] = 10;
+
+    if (a['a'] == 10)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+
+    if (a['a'] == 10)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_operator_access() {
+
+    ft::map<T1, T2> a;
+
+    for (int i = 0; i < 50; i++)
+        a[T1()] = T2();
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).first == T1())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	if ((*(a.begin())).second == a[T1()])
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	if (a[T1()] == T2())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void operator_access() {
+
+	std::cout << std::endl;
+	title_of_test("Acces de l'equipage dans le navire [operator access]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_operator_access_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_operator_access<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_operator_access<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_operator_access<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_operator_access<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_operator_access<int, std::string>();
+}
+
+void test_insert_single_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<char, int>('a', 999));
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<char, int>('b', 0));
+    if (a.size() == 2)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_insert_range_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(ft::make_pair<char, int>('a', 5));
+    a.insert(ft::make_pair<char, int>('b', 6));
+    a.insert(ft::make_pair<char, int>('c', 5));
+    a.insert(ft::make_pair<char, int>('d', 6));
+
+    if (a.size() == 4)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    ft::map<char, int> b;
+
+    b.insert(a.begin(), a.end());
+
+    if (b.size() == 4)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    b.insert(a.begin(), a.end());
+
+    if (b.size() == 4)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_insert_hint_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 5));
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 6));
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('b', 6));
+    if (a.size() == 2)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_insert_practical() {
+
+	std::cout << std::endl;
+    std::cout << WHITE << "SINGLE.              " << RESET;
+    test_insert_single_practical();
+    std::cout << WHITE << "RANGE.               " << RESET;
+    test_insert_range_practical();
+    std::cout << WHITE << "HINT.                " << RESET;
+    test_insert_hint_practical();
+}
+
+template <typename T1, typename T2>
+void test_insert() {
+
+    ft::map<T1, T2> a;
+    ft::map<T1, T2> empty;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    ft::map<T1, T2> b;
+
+    b.insert(empty.begin(), empty.end());
+    if (b.empty() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    b.insert(a.begin(), a.end());
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    b.insert(a.begin(), a.end());
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void insert() {
+
+	std::cout << std::endl;
+	title_of_test("A l'abordage ! [insert practical]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_insert_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_insert<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_insert<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_insert<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_insert<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_insert<int, std::string>();
+}
+
+void test_erase_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 1));
+    a.insert(a.begin(), ft::make_pair<char, int>('b', 2));
+    a.insert(a.begin(), ft::make_pair<char, int>('c', 3));
+    a.insert(a.begin(), ft::make_pair<char, int>('d', 4));
+
+    if ((*(a.begin())).first == 'a')
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a.size() == 4)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if ((*(a.begin())).first == 'b')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).second == 2)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if ((*(a.begin())).first == 'c')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).second == 3)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if ((*(a.begin())).first == 'd')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).second == 4)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_erase_key_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 1));
+    a.insert(a.begin(), ft::make_pair<char, int>('b', 2));
+    a.insert(a.begin(), ft::make_pair<char, int>('c', 3));
+    a.insert(a.begin(), ft::make_pair<char, int>('d', 4));
+
+    if (a.erase('a') == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a.erase('a') == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('b') == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('b') == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('c') == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('c') == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('d') == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('d') == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase('z') == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_erase_key() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+    if (a.erase(T1()) == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅"	<< "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.erase(T1()) == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void test_erase_range_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 1));
+    a.insert(a.begin(), ft::make_pair<char, int>('b', 2));
+    a.insert(a.begin(), ft::make_pair<char, int>('c', 3));
+    a.insert(a.begin(), ft::make_pair<char, int>('d', 4));
+
+    a.erase(a.begin(), ++a.begin());
+
+    if ((*(a.begin())).first == 'b')
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).second == 2)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin(), a.end());
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_erase_range() {
+
+    ft::map<T1, T2> a;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+    a.erase(a.begin(), a.end());
+
+    if (a.empty())
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.erase(a.begin(), a.end());
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void erase()
+{
+	std::cout << std::endl;
+	title_of_test("Une baleine arrive ! [erase]");
+
+	std::cout << std::endl;
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "Practical         " << RESET;
+    test_erase_practical();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "Range             " << RESET;
+    test_erase_range_practical();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "Key               " << RESET;
+    test_erase_key_practical();
+
+	std::cout << std::endl;
+	title_of_test("1 mort a bord... [erase_key]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_erase_key<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_erase_key<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_erase_key<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_erase_key<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_erase_key<int, std::string>();
+
+	std::cout << std::endl;
+	title_of_test("Une brochette de 10 morts a bord... [erase_range]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_erase_range<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_erase_range<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_erase_range<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_erase_range<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_erase_range<int, std::string>();
+}
+
+void test_swap_practical() {
+
+    ft::map<char, int> a;
+
+    a.insert(a.begin(), ft::make_pair<char, int>('a', 1));
+    a.insert(a.begin(), ft::make_pair<char, int>('b', 2));
+    a.insert(a.begin(), ft::make_pair<char, int>('c', 3));
+    a.insert(a.begin(), ft::make_pair<char, int>('d', 4));
+
+    ft::map<char, int> b;
+
+    a.swap(b);
+
+    if (b.size() == 4)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(b.begin())).first == 'a')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(++b.begin())).first == 'b')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--b.end())).first == 'd')
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_swap() {
+
+    ft::map<T1, T2> a;
+    ft::map<T1, T2> b;
+
+    a.insert(ft::make_pair<T1, T2>(T1(), T2()));
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).first == T1())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(a.begin())).second == T2())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--a.end())).first == T1())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--a.end())).second == T2())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (b.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.swap(b);
+
+    if (b.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(b.begin())).first == T1())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(b.begin())).second == T2())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--b.end())).first == T1())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if ((*(--b.end())).second == T2())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void swap() {
+
+	std::cout << std::endl;
+	title_of_test("A la conquete de l'ile au tresor ! [swap]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_swap_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_swap<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_swap<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_swap<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_swap<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_swap<int, std::string>();
+}
+
+void test_clear_practical()
+{
+    ft::map<char, int> a;
+
+    for (int i = 0; i < 50; i++)
+        a.insert(ft::make_pair<char, int>(i, i));
+
+    if (a.size() == 50)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.clear();
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_clear()
+{
+    ft::map<T1, T2> a;
+
+    a[T1()] = T2();
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.clear();
+
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a[T1()];
+
+    if (a.size() == 1)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    a.clear();
+    if (a.empty())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void clear()
+{
+	std::cout << std::endl;
+	title_of_test("Creusage du trou... [clear]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_clear_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_clear<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_clear<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_clear<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_clear<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_clear<int, std::string>();
+}
+
+template <typename T1, typename T2>
+void test_find() {
+
+    ft::map<T1, T2> a;
+    const ft::map<T1, T2> b;
+
+    if (a.find(T1()) == a.end())
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (b.find(T1()) == b.end())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a[T1()];
+
+    if (a.size() == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (a.find(T1()) == a.begin())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+    if (a.find(T1()) == --a.end())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (b.size() == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    if (b.find(T1()) == b.begin())
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+}
+
+void find() {
+
+	std::cout << std::endl;
+	title_of_test("Tresor TROUVE !!!!!! [find]");
+
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_find<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_find<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_find<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_find<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_find<int, std::string>();
+}
+
+void test_count_practical()
+{
+    ft::map<char, int> a;
+
+    for (int i = 1; i < 51; i++)
+        a.insert(ft::make_pair<char, int>(i, i));
+
+    for (int i = 1; i < 51; i++) {
+
+		if (a.count(i) == 1)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 9 == 0))
+			std::cout << std::endl << "                       ";
+	}
+	std::cout << std::endl << "                      ";
+	if (a.count(51) == 0)
+    	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl << "                      ";
+
+    a.clear();
+
+    for (int i = 1; i < 51; i++) {
+
+		if (a.count(i) == 0)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 9 == 0))
+			std::cout << std::endl << "                      ";
+	}
+
+	std::cout << std::endl;
+}
+
+template <typename T1, typename T2>
+void test_count()
+{
+    ft::map<T1, T2> a;
+
+    if (a.count(T1()) == 0)
+        std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << " [" << "❌" << "] " << RESET;
+
+    if (a.count(T1()) == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a[T1()];
+
+    if (a.count(T1()) == 1)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+    a.erase(a.begin());
+
+    if (a.count(T1()) == 0)
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+    	std::cout << PINK << "[" << "❌" << "] " << RESET;
+}
+
+void count() {
+
+	std::cout << std::endl;
+	title_of_test("Comptage des pieces !!!!!! [count]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_count_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_count<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_count<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_count<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_count<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_count<int, std::string>();
+}
+
+void test_lower_bound_practical()
+{
+    ft::map<char, int> a;
+    std::map<char, int> std_a;
+
+    for (int i = 0; i < 50; i++)
+    {
+        a.insert(ft::make_pair<char, int>(i, i));
+        std_a.insert(std::make_pair(i, i));
+        assert((*(a.lower_bound(i))).first == i);
+        assert((*(std_a.lower_bound(i))).first == i);
+    }
+    a.clear();
+    std_a.clear();
+
+    assert(a.lower_bound(char()) == a.end());
+    assert(std_a.lower_bound(char()) == std_a.end());
+    a['a'] = 20;
+    a['b'] = 40;
+    a['c'] = 60;
+    a['d'] = 80;
+    a['e'] = 100;
+    a['g'] = 120;
+
+    std_a['a'] = 20;
+    std_a['b'] = 40;
+    std_a['c'] = 60;
+    std_a['d'] = 80;
+    std_a['e'] = 100;
+    std_a['g'] = 120;
+
+    assert(std_a.lower_bound('b') == ++std_a.begin());
+    assert(std_a.lower_bound('f') == --std_a.end());
+    assert((*(std_a.lower_bound('f'))).first == 'g');
+    assert((*(std_a.lower_bound('f'))).second == 120);
+
+    assert(a.lower_bound('b') == ++a.begin());
+    assert(a.lower_bound('f') == --a.end());
+    assert((*(a.lower_bound('f'))).first == 'g');
+    assert((*(a.lower_bound('f'))).second == 120);
+
+    const ft::map<char, int> b = a;
+
+    assert(b.lower_bound('b') == ++b.begin());
+    assert(b.lower_bound('f') == --b.end());
+    assert((*(b.lower_bound('f'))).first == 'g');
+    assert((*(b.lower_bound('f'))).second == 120);
+}
+
+template <typename T1, typename T2>
+void test_lower_bound()
+{
+    ft::map<T1, T2> a;
+    std::map<T1, T2> std_a;
+
+    assert(a.lower_bound(T1()) == a.end());
+    assert(std_a.lower_bound(T1()) == std_a.end());
+    a[T1()];
+    std_a[T1()];
+
+    assert(a.lower_bound(T1()) == a.begin());
+    assert((*(a.lower_bound(T1()))).first == T1());
+    assert((*(a.lower_bound(T1()))).second == T2());
+
+    assert(std_a.lower_bound(T1()) == std_a.begin());
+    assert((*(std_a.lower_bound(T1()))).first == T1());
+    assert((*(std_a.lower_bound(T1()))).second == T2());
+
+    const ft::map<T1, T2> b(a);
+
+    assert(b.lower_bound(T1()) == b.begin());
+    assert((*(b.lower_bound(T1()))).first == T1());
+    assert((*(b.lower_bound(T1()))).second == T2());
+}
+
+void lower_bound()
+{
+    test_lower_bound_practical();
+    test_lower_bound<char, int>();
+    test_lower_bound<int, int>();
+    test_lower_bound<float, char>();
+    test_lower_bound<char *, int>();
+    test_lower_bound<int, std::string>();
+
+    std::cout <<  "lower_bound: " << std::endl;
+}
+
+void test_upper_bound_practical()
+{
+    ft::map<char, int> a;
+    std::map<char, int> std_a;
+
+    for (int i = 0; i < 50; i++)
+    {
+        a.insert(ft::make_pair<char, int>(i, i));
+        std_a.insert(std::make_pair(i, i));
+        assert(a.upper_bound(i) == a.end());
+        assert(std_a.upper_bound(i) == std_a.end());
+    }
+    a.clear();
+    std_a.clear();
+
+    assert(a.upper_bound(char()) == a.end());
+    assert(std_a.upper_bound(char()) == std_a.end());
+    a['a'] = 20;
+    a['b'] = 40;
+    a['c'] = 60;
+    a['d'] = 80;
+    a['e'] = 100;
+    a['g'] = 120;
+
+    std_a['a'] = 20;
+    std_a['b'] = 40;
+    std_a['c'] = 60;
+    std_a['d'] = 80;
+    std_a['e'] = 100;
+    std_a['g'] = 120;
+
+    assert((*(std_a.upper_bound('a'))).first == 'b');
+    assert((*(std_a.upper_bound('a'))).second == 40);
+    assert((*(std_a.upper_bound('f'))).first == 'g');
+    assert((*(std_a.upper_bound('f'))).second == 120);
+    assert(std_a.upper_bound('g') == std_a.end());
+
+    assert((*(a.upper_bound('a'))).first == 'b');
+    assert((*(a.upper_bound('a'))).second == 40);
+    assert((*(a.upper_bound('f'))).first == 'g');
+    assert((*(a.upper_bound('f'))).second == 120);
+    assert(a.upper_bound('g') == a.end());
+
+    const ft::map<char, int> b = a;
+
+    assert((*(b.upper_bound('a'))).first == 'b');
+    assert((*(b.upper_bound('a'))).second == 40);
+    assert((*(b.upper_bound('f'))).first == 'g');
+    assert((*(b.upper_bound('f'))).second == 120);
+    assert(b.upper_bound('g') == b.end());
+}
+
+template <typename T1, typename T2>
+void test_upper_bound()
+{
+    ft::map<T1, T2> a;
+    std::map<T1, T2> std_a;
+
+    assert(a.upper_bound(T1()) == a.end());
+    assert(std_a.upper_bound(T1()) == std_a.end());
+    a[T1()];
+    std_a[T1()];
+
+    assert(a.upper_bound(T1()) == a.end());
+
+    assert(std_a.upper_bound(T1()) == std_a.end());
+    const ft::map<T1, T2> b(a);
+
+    assert(b.upper_bound(T1()) == b.end());
+}
+
+void upper_bound()
+{
+    test_upper_bound_practical();
+    test_upper_bound<char, int>();
+    test_upper_bound<int, int>();
+    test_upper_bound<float, char>();
+    test_upper_bound<char *, int>();
+    test_upper_bound<int, std::string>();
+
+    std::cout <<  "upper_bound: " << std::endl;
+}
+
+void test_equal_range_practical()
+{
+    ft::map<char, int> mymap;
+
+    mymap['a'] = 10;
+    mymap['b'] = 20;
+    mymap['c'] = 30;
+
+    ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> ret;
+    ret = mymap.equal_range('b');
+
+    assert(ret.first->first == 'b');
+    assert(ret.first->second == 20);
+    assert(ret.second->first == 'c');
+    assert(ret.second->second == 30);
+
+    ret = mymap.equal_range('c');
+
+    assert(ret.first->first == 'c');
+    assert(ret.first->second == 30);
+    assert(ret.second == mymap.end());
+
+    mymap['e'] = 50;
+
+    ret = mymap.equal_range('d');
+
+    assert(ret.first->first == 'e');
+    assert(ret.first->second == 50);
+    assert(ret.second->first == 'e');
+    assert(ret.second->second == 50);
+}
+
+void equal_range()
+{
+    test_equal_range_practical();
+
+    std::cout << "equal_range: " "OK" << std::endl;
+}
+
+void	test_de_la_carte_du_tresor() {
+
+    title_of_function("Test de la carte au tresor");
+
+    default_constructor();
+    range_constructor();
+    copy_constructor();
+    assignement_operator();
+    begin_end();
+    rbegin_rend();
+    empty();
+    size();
+    max_size();
+    operator_access();
+    insert();
+    erase();
+    swap();
+    clear();
+    find();
+    count();
+    lower_bound();
+    upper_bound();
+    equal_range();
+}
+
+void	test_de_l_humanite() {
+
+    title_of_function("Test genealogique de l'humanite");
 
 	ft::map<std::string, int> test_insert;
 
@@ -1017,18 +2622,78 @@ void test_de_l_humanite() {
 	test_insert.insert(ft::make_pair(std::string("sevenhundredthirty"),730));
 	test_insert.insert(ft::make_pair(std::string("fivehundredfiftynine"),559));
 
-	std::cout << test_insert.size() << std::endl;
-	std::cout << test_insert.max_size() << std::endl;
-	std::cout << test_insert.begin()->first << "|" << test_insert.begin()->second<< std::endl;
-	std::cout << test_insert.rbegin()->first << "|" << test_insert.rbegin()->second<< std::endl;
-	std::cout << test_insert.count("sixteen")<< std::endl;
-	std::cout << test_insert.count("onemillion")<< std::endl;
-	std::cout << test_insert.lower_bound("sixteen")->first<< std::endl;
-	std::cout << test_insert.upper_bound("sixteen")->first<< std::endl;
+    title_of_test("Genese de l'humanite");
+
+    std::cout << WHITE_B << "SIZE.        " << RESET;
+	if (test_insert.size() == 1000)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "MAX_SIZE.    " << RESET;
+	if (test_insert.max_size() == 128102389400760775)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "BEGIN.       " << RESET;
+	if (test_insert.begin()->first == "eight")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (test_insert.begin()->second == 8)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "RBEGIN.      " << RESET;
+	if (test_insert.rbegin()->first == "zero")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (test_insert.rbegin()->second == 0)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "COUNT.       " << RESET;
+	if (test_insert.count("sixteen"))
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (!test_insert.count("onemillion"))
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "BOUND.       " << RESET;
+	std::cout << std::endl;
+	std::cout << WHITE << "     Upper   " << RESET;
+	if (test_insert.lower_bound("sixteen")->first == "sixteen")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
+	std::cout << WHITE << "     Lower   " << RESET;
+	if (test_insert.upper_bound("sixteen")->first == "sixty")
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "FIND.        " << RESET;
 	if (test_insert.find("sixteen")->first == "sixteen")
         std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
 	else
 		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl << std::endl << std::endl;
+
+    title_of_test("Destruction anthropocenique de l'humanite");
 
 	ft::map<std::string, int>::iterator erase_iterator = test_insert.begin();
 	for (; erase_iterator != test_insert.end();){
@@ -1038,22 +2703,79 @@ void test_de_l_humanite() {
 			test_insert.erase(tmp);
 		}
 	}
+
+    std::cout << WHITE_B << "SIZE.        " << RESET;
+	if (test_insert.size() == 500)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
 	std::cout << std::endl;
-	std::cout << test_insert.size() << std::endl;
-	std::cout << test_insert.max_size() << std::endl;
-	std::cout << test_insert.begin()->first << "|" << test_insert.begin()->second<< std::endl;
-	std::cout << test_insert.rbegin()->first << "|" << test_insert.rbegin()->second<< std::endl;
-	std::cout << test_insert.count("sixteen")<< std::endl;
-	std::cout << test_insert.count("onemillion")<< std::endl;
-	std::cout << test_insert.lower_bound("sixteen")->first<< std::endl;
-	std::cout << test_insert.upper_bound("sixteen")->first<< std::endl;
+
+    std::cout << WHITE_B << "MAX_SIZE.    " << RESET;
+	if (test_insert.max_size() == 128102389400760775)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "BEGIN.       " << RESET;
+	if (test_insert.begin()->first == "eight")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (test_insert.begin()->second == 8)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "RBEGIN.      " << RESET;
+	if (test_insert.rbegin()->first == "zero")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (test_insert.rbegin()->second == 0)
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "COUNT.       " << RESET;
+	if (test_insert.count("sixteen"))
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (!test_insert.count("onemillion"))
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "BOUND.       " << RESET;
+	std::cout << std::endl;
+	std::cout << WHITE << "     Upper   " << RESET;
+	if (test_insert.lower_bound("sixteen")->first == "sixteen")
+        std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
+	std::cout << WHITE << "     Lower   " << RESET;
+	if (test_insert.upper_bound("sixteen")->first == "sixty")
+        std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
+    else
+		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl;
+
+    std::cout << WHITE_B << "FIND.        " << RESET;
 	if (test_insert.find("sixteen")->first == "sixteen")
         std::cout << GREEN <<"[" << "✅" << "]      " << RESET;
 	else
 		std::cout << PINK << "[" << "❌" << "]      " << RESET;
+	std::cout << std::endl << std::endl;
 }
 
 void	test_map() {
 
+	test_de_la_carte_du_tresor();
 	test_de_l_humanite();
 }
