@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:27:32 by emtran            #+#    #+#             */
-/*   Updated: 2023/02/13 19:12:53 by emtran           ###   ########.fr       */
+/*   Updated: 2023/02/16 14:53:31 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1296,19 +1296,25 @@ void find() {
 
 void test_count_practical()
 {
-    ft::map<char, int> a;
+    ft::map<char, int> 	a;
+	bool				trap = 0;
 
     for (int i = 1; i < 51; i++)
         a.insert(ft::make_pair<char, int>(i, i));
 
     for (int i = 1; i < 51; i++) {
 
-		if (a.count(i) == 1)
+		if (a.count(i) == 1 && trap == 0)
+		{
+			trap = 1;
+        	std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+		}
+		else if (a.count(i) == 1 && trap == 1)
         	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
 		else
     		std::cout << PINK << "[" << "❌" << "] " << RESET;
 		if ((i % 9 == 0))
-			std::cout << std::endl << "                       ";
+			std::cout << std::endl << "                      ";
 	}
 	std::cout << std::endl << "                      ";
 	if (a.count(51) == 0)
@@ -1360,6 +1366,9 @@ void test_count()
         std::cout << GREEN <<"[" << "✅" << "] " << RESET;
 	else
     	std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
+
 }
 
 void count() {
@@ -1381,23 +1390,54 @@ void count() {
     test_count<int, std::string>();
 }
 
-void test_lower_bound_practical()
-{
+void test_lower_bound_practical() {
+
     ft::map<char, int> a;
     std::map<char, int> std_a;
+	bool trap1 = 0;
+	bool trap2 = 0;
 
-    for (int i = 0; i < 50; i++)
-    {
+    for (int i = 0; i < 50; i++) {
+
         a.insert(ft::make_pair<char, int>(i, i));
         std_a.insert(std::make_pair(i, i));
-        assert((*(a.lower_bound(i))).first == i);
-        assert((*(std_a.lower_bound(i))).first == i);
+
+		if ((*(a.lower_bound(i))).first == i && trap1 == 0)
+		{
+			trap1 = 1;
+        	std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+		}
+		else if ((*(a.lower_bound(i))).first == i && trap1 == 1)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 5 == 0))
+			std::cout << std::endl << "                      ";
+
+		if ((*(std_a.lower_bound(i))).first == i && trap2 == 0)
+		{
+			trap2 = 1;
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		}
+		else if ((*(a.lower_bound(i))).first == i && trap1 == 1)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 9 == 0))
+			std::cout << std::endl << "                      ";
     }
     a.clear();
     std_a.clear();
 
-    assert(a.lower_bound(char()) == a.end());
-    assert(std_a.lower_bound(char()) == std_a.end());
+	if (a.lower_bound(char()) == a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (std_a.lower_bound(char()) == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
     a['a'] = 20;
     a['b'] = 40;
     a['c'] = 60;
@@ -1412,22 +1452,60 @@ void test_lower_bound_practical()
     std_a['e'] = 100;
     std_a['g'] = 120;
 
-    assert(std_a.lower_bound('b') == ++std_a.begin());
-    assert(std_a.lower_bound('f') == --std_a.end());
-    assert((*(std_a.lower_bound('f'))).first == 'g');
-    assert((*(std_a.lower_bound('f'))).second == 120);
+	if (std_a.lower_bound('b') == ++std_a.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (std_a.lower_bound('f') == --std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.lower_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.lower_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
-    assert(a.lower_bound('b') == ++a.begin());
-    assert(a.lower_bound('f') == --a.end());
-    assert((*(a.lower_bound('f'))).first == 'g');
-    assert((*(a.lower_bound('f'))).second == 120);
+	if (a.lower_bound('b') == ++a.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (a.lower_bound('f') == --a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.lower_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.lower_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
     const ft::map<char, int> b = a;
 
-    assert(b.lower_bound('b') == ++b.begin());
-    assert(b.lower_bound('f') == --b.end());
-    assert((*(b.lower_bound('f'))).first == 'g');
-    assert((*(b.lower_bound('f'))).second == 120);
+	if (b.lower_bound('b') == ++b.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (b.lower_bound('f') == --b.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.lower_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.lower_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
 }
 
 template <typename T1, typename T2>
@@ -1436,55 +1514,129 @@ void test_lower_bound()
     ft::map<T1, T2> a;
     std::map<T1, T2> std_a;
 
-    assert(a.lower_bound(T1()) == a.end());
-    assert(std_a.lower_bound(T1()) == std_a.end());
+	if (a.lower_bound(T1()) == a.end())
+ 		std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << " [" << "❌" << "] " << RESET;
+	if (std_a.lower_bound(T1()) == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
     a[T1()];
     std_a[T1()];
 
-    assert(a.lower_bound(T1()) == a.begin());
-    assert((*(a.lower_bound(T1()))).first == T1());
-    assert((*(a.lower_bound(T1()))).second == T2());
+	if (a.lower_bound(T1()) == a.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.lower_bound(T1()))).first == T1())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.lower_bound(T1()))).second == T2())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
-    assert(std_a.lower_bound(T1()) == std_a.begin());
-    assert((*(std_a.lower_bound(T1()))).first == T1());
-    assert((*(std_a.lower_bound(T1()))).second == T2());
+	if (std_a.lower_bound(T1()) == std_a.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.lower_bound(T1()))).first == T1())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.lower_bound(T1()))).second == T2())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
     const ft::map<T1, T2> b(a);
 
-    assert(b.lower_bound(T1()) == b.begin());
-    assert((*(b.lower_bound(T1()))).first == T1());
-    assert((*(b.lower_bound(T1()))).second == T2());
+	if (b.lower_bound(T1()) == b.begin())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.lower_bound(T1()))).first == T1())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.lower_bound(T1()))).second == T2())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
 }
 
-void lower_bound()
-{
+void lower_bound() {
+
+	std::cout << std::endl;
+	title_of_test("Distribution de quelques ecus pour l'equipage [lower_bound]");
+
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
     test_lower_bound_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
     test_lower_bound<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
     test_lower_bound<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
     test_lower_bound<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
     test_lower_bound<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
     test_lower_bound<int, std::string>();
-
-    std::cout <<  "lower_bound: " << std::endl;
 }
 
-void test_upper_bound_practical()
-{
+void test_upper_bound_practical() {
+
     ft::map<char, int> a;
     std::map<char, int> std_a;
+	bool trap1 = 0;
+	bool trap2 = 0;
 
-    for (int i = 0; i < 50; i++)
-    {
+    for (int i = 0; i < 50; i++) {
+
         a.insert(ft::make_pair<char, int>(i, i));
         std_a.insert(std::make_pair(i, i));
-        assert(a.upper_bound(i) == a.end());
-        assert(std_a.upper_bound(i) == std_a.end());
+
+		if (a.upper_bound(i) == a.end() && trap1 == 0)
+		{
+			trap1 = 1;
+        	std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+		}
+		else if (a.upper_bound(i) == a.end() && trap1 == 1)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 5 == 0))
+			std::cout << std::endl << "                      ";
+
+		if (std_a.upper_bound(i) == std_a.end() && trap2 == 0)
+		{
+			trap2 = 1;
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		}
+		else if (std_a.upper_bound(i) == std_a.end() && trap1 == 1)
+        	std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+		else
+    		std::cout << PINK << "[" << "❌" << "] " << RESET;
+		if ((i % 9 == 0))
+			std::cout << std::endl << "                      ";
     }
     a.clear();
     std_a.clear();
 
-    assert(a.upper_bound(char()) == a.end());
-    assert(std_a.upper_bound(char()) == std_a.end());
+	if (a.upper_bound(char()) == a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (std_a.upper_bound(char()) == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
     a['a'] = 20;
     a['b'] = 40;
     a['c'] = 60;
@@ -1499,25 +1651,72 @@ void test_upper_bound_practical()
     std_a['e'] = 100;
     std_a['g'] = 120;
 
-    assert((*(std_a.upper_bound('a'))).first == 'b');
-    assert((*(std_a.upper_bound('a'))).second == 40);
-    assert((*(std_a.upper_bound('f'))).first == 'g');
-    assert((*(std_a.upper_bound('f'))).second == 120);
-    assert(std_a.upper_bound('g') == std_a.end());
+	if ((*(std_a.upper_bound('a'))).first == 'b')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.upper_bound('a'))).second == 40)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.upper_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(std_a.upper_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (std_a.upper_bound('g') == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
-    assert((*(a.upper_bound('a'))).first == 'b');
-    assert((*(a.upper_bound('a'))).second == 40);
-    assert((*(a.upper_bound('f'))).first == 'g');
-    assert((*(a.upper_bound('f'))).second == 120);
-    assert(a.upper_bound('g') == a.end());
+	if ((*(a.upper_bound('a'))).first == 'b')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.upper_bound('a'))).second == 40)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.upper_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(a.upper_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (a.upper_bound('g') == a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
     const ft::map<char, int> b = a;
 
-    assert((*(b.upper_bound('a'))).first == 'b');
-    assert((*(b.upper_bound('a'))).second == 40);
-    assert((*(b.upper_bound('f'))).first == 'g');
-    assert((*(b.upper_bound('f'))).second == 120);
-    assert(b.upper_bound('g') == b.end());
+	if ((*(b.upper_bound('a'))).first == 'b')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.upper_bound('a'))).second == 40)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.upper_bound('f'))).first == 'g')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if ((*(b.upper_bound('f'))).second == 120)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (b.upper_bound('g') == b.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
 }
 
 template <typename T1, typename T2>
@@ -1526,33 +1725,61 @@ void test_upper_bound()
     ft::map<T1, T2> a;
     std::map<T1, T2> std_a;
 
-    assert(a.upper_bound(T1()) == a.end());
-    assert(std_a.upper_bound(T1()) == std_a.end());
+	if (a.upper_bound(T1()) == a.end())
+ 		std::cout << GREEN <<" [" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << " [" << "❌" << "] " << RESET;
+	if (std_a.upper_bound(T1()) == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
     a[T1()];
     std_a[T1()];
 
-    assert(a.upper_bound(T1()) == a.end());
+	if (a.upper_bound(T1()) == a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (std_a.upper_bound(T1()) == std_a.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
-    assert(std_a.upper_bound(T1()) == std_a.end());
     const ft::map<T1, T2> b(a);
 
-    assert(b.upper_bound(T1()) == b.end());
+	if (b.upper_bound(T1()) == b.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+
+	std::cout << std::endl;
 }
 
 void upper_bound()
 {
-    test_upper_bound_practical();
-    test_upper_bound<char, int>();
-    test_upper_bound<int, int>();
-    test_upper_bound<float, char>();
-    test_upper_bound<char *, int>();
-    test_upper_bound<int, std::string>();
+	std::cout << std::endl;
+	title_of_test("Le CAPITAINE VEUT PRENDRE TOUTE LA TUNE [upper_bound]");
 
-    std::cout <<  "upper_bound: " << std::endl;
+    std::cout << WHITE_B << "0. " << RESET << BLUE_B << "Mise en place     " << RESET;
+    test_upper_bound_practical();
+    std::cout << WHITE_B << "1. " << RESET << BLUE_B << "<char, int>       " << RESET;
+    test_upper_bound<char, int>();
+    std::cout << WHITE_B << "2. " << RESET << BLUE_B << "<int, int>        " << RESET;
+    test_upper_bound<int, int>();
+    std::cout << WHITE_B << "3. " << RESET << BLUE_B << "<float, char>     " << RESET;
+    test_upper_bound<float, char>();
+    std::cout << WHITE_B << "4. " << RESET << BLUE_B << "<char *, int>     " << RESET;
+    test_upper_bound<char *, int>();
+    std::cout << WHITE_B << "5. " << RESET << BLUE_B << "<int, std::string>" << RESET;
+    test_upper_bound<int, std::string>();
 }
 
-void test_equal_range_practical()
-{
+void equal_range() {
+
+	std::cout << std::endl;
+	title_of_test("REVOLUTION ! Capitaine au bucher et le tresor pour l'humanite !!! [equal]");
+
     ft::map<char, int> mymap;
 
     mymap['a'] = 10;
@@ -1562,32 +1789,65 @@ void test_equal_range_practical()
     ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> ret;
     ret = mymap.equal_range('b');
 
-    assert(ret.first->first == 'b');
-    assert(ret.first->second == 20);
-    assert(ret.second->first == 'c');
-    assert(ret.second->second == 30);
+	std::cout << WHITE_B << "1. " << RESET;
+	if (ret.first->first == 'b')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.first->second == 20)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.second->first == 'c')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.second->second == 30)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
 
     ret = mymap.equal_range('c');
 
-    assert(ret.first->first == 'c');
-    assert(ret.first->second == 30);
-    assert(ret.second == mymap.end());
+	std::cout << WHITE_B << "2. " << RESET;
+	if (ret.first->first == 'c')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.first->second == 30)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.second == mymap.end())
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	std::cout << std::endl;
 
     mymap['e'] = 50;
 
     ret = mymap.equal_range('d');
 
-    assert(ret.first->first == 'e');
-    assert(ret.first->second == 50);
-    assert(ret.second->first == 'e');
-    assert(ret.second->second == 50);
-}
+	std::cout << WHITE_B << "3. " << RESET;
+	if (ret.first->first == 'e')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.first->second == 50)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.second->first == 'e')
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
+	if (ret.second->second == 50)
+ 		std::cout << GREEN <<"[" << "✅" << "] " << RESET;
+	else
+ 		std::cout << PINK << "[" << "❌" << "] " << RESET;
 
-void equal_range()
-{
-    test_equal_range_practical();
-
-    std::cout << "equal_range: " "OK" << std::endl;
+	std::cout << std::endl << std::endl << std::endl;
 }
 
 void	test_de_la_carte_du_tresor() {
